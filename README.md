@@ -1,5 +1,5 @@
 # IziViews
-<p><strong>IziViews is an Android library that simplifies and enhances the creation and initialization of an Application Project.</strong></p>
+<p><strong>IziViews is an Android library that simplifies and enhances the creation and initialization process of a Project.</strong></p>
 <p>Extended Activities, Fragments and Views, enhanced lifecycle Delegates, automations and new features to remove Android hassle and let the Developer focus on Development.</p>
 <p>I have been developing and using this library for quite some time and decided to upload it, for anyone who might benefit from it and anyone willing to contribute to optimizing and expanding it.</p>
 
@@ -8,6 +8,7 @@
  - [x] Automated View initialization, you won't have to do <strong>any</strong> findViewById
  - [x] Automatically saved instance state, simplified and enriched restoration
  - [x] Easily retain properties and control their behaviour throughout their lifecycle
+ - [x] Simplified Tab Fragments and optimized Fragment Pager Adapter
 
 ## Usage
 ### Activity
@@ -105,20 +106,21 @@ public class SampleFragment extends IziFragment {
 }
 ```
 ### Restoring a property's state
-<p>Set it to be saved, by tagging it with <strong>SaveForInstanceRestoration</strong>.</p>
+<p>Views and other Objects can be saved and restored from the <strong>onRestoration</strong> delegate, which provides a dummy instance of the Activity of Fragment containing the saved properties.</p>
+ - [x] Set it to be saved, by tagging it with <strong>SaveForInstanceRestoration</strong>.
 ```java
 @SaveForInstanceRestoration
 private TextView sampleTextView;
 ```
-<p>Handle the restoration process on the <strong>onRestoration</strong> delegate.</p>
+ - [x] Handle the restoration process on the <strong>onRestoration</strong> delegate.</p>
 ```java
 @Override
 public void onRestoration(@NonNull IziActivity savedInstance) {
     sampleTextView.setText(((SampleActivity) savedInstance).sampleTextView.getText());
 }
 ```
-<p>Views in the savedInstance object <strong>do not have</strong> a Context, to avoid leaking. Thuss, you should not assign them directly, just get the desired data.</p>
-<p><i>The restoration process is identical with Fragments.</i></p>
+<p>Views in the savedInstance object <strong>do not have</strong> a Context, to avoid leaking. Thus, you should not assign them directly, just get the desired data.<br/>
+<i>The restoration process is <b>identical</b> for Fragments.</i></p>
 ### Retaining complex components, like Asyncs and Sockets
 <p>Use the Retainable class, with it's PersistenceDelegates interface.</p>
  - [x] Declare the Retainable object, adapting it to the desired type.
