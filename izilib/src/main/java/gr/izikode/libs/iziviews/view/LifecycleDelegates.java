@@ -3,7 +3,7 @@ package gr.izikode.libs.iziviews.view;
 import android.support.annotation.NonNull;
 
 /**
- * Created by UserOne on 09/11/2016.
+ * Created by izi.
  */
 
 public interface LifecycleDelegates<T> {

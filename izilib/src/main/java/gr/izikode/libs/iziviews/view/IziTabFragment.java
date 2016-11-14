@@ -1,7 +1,7 @@
 package gr.izikode.libs.iziviews.view;
 
 /**
- * Created by UserOne on 06/11/2016.
+ * Created by izi.
  */
 
 public abstract class IziTabFragment extends IziFragment {

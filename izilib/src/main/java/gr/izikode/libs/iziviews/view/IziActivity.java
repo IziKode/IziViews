@@ -29,7 +29,7 @@ import gr.izikode.libs.iziviews.util.ObjectSerializer;
 import gr.izikode.libs.iziviews.util.Retainable;
 
 /**
- * Created by UserOne on 09/11/2016.
+ * Created by izi.
  */
 
 @InstanceRestoration

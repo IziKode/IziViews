@@ -1,7 +1,7 @@
 package gr.izikode.libs.iziviews.util;
 
 /**
- * Created by UserOne on 11/11/2016.
+ * Created by izi.
  */
 
 public interface PersistenceDelegates<T> {

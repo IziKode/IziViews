@@ -3,7 +3,7 @@ package gr.izikode.libs.iziviews.util;
 import java.io.Serializable;
 
 /**
- * Created by UserOne on 11/11/2016.
+ * Created by izi.
  */
 
 public abstract class Retainable<T> implements PersistenceDelegates<T>, Serializable {

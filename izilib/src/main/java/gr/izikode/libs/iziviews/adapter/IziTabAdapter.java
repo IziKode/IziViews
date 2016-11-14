@@ -17,7 +17,7 @@ import java.util.List;
 import gr.izikode.libs.iziviews.view.IziTabFragment;
 
 /**
- * Created by UserOne on 06/11/2016.
+ * Created by izi.
  */
 
 public class IziTabAdapter extends FragmentPagerAdapter {

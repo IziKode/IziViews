@@ -16,7 +16,7 @@ import gr.izikode.libs.iziviews.util.ExtendedReflector;
 import gr.izikode.libs.iziviews.util.Retainable;
 
 /**
- * Created by UserOne on 10/11/2016.
+ * Created by izi.
  */
 
 @SuppressLint("ValidFragment")
