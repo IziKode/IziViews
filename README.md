@@ -148,3 +148,5 @@ asyncContainer = new Retainable<AsyncTask<Void, Void, Void>>() {
 ```java
 asyncContainer.setValue(async);
 ```
+## License
+IziViews is released under the Apache2.0 license. See LICENSE for details.
