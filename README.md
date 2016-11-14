@@ -2,7 +2,6 @@
 <p><strong>IziViews is an Android library that simplifies and enhances the creation and initialization of an Application Project.</strong></p>
 <p>Extended Activities, Fragments and Views, enhanced lifecycle Delegates, automations and new features to remove Android hassle and let the Developer focus on Development.</p>
 <p>I have been developing and using this library for quite some time and decided to upload it, for anyone who might benefit from it and anyone willing to contribute to optimizing and expanding it.</p>
-<br/>
 
 ## Features
  - [x] Extended Activities, Fragments and Views, with enhanced lifecycle delegates
@@ -63,7 +62,6 @@ public class SampleActivity extends IziActivity {
     }
 }
 ```
-<br/>
 ### Fragment
 ```java
 public class SampleFragment extends IziFragment {
@@ -106,7 +104,6 @@ public class SampleFragment extends IziFragment {
     }
 }
 ```
-<br/>
 ### Restoring a property's state
 <p>Set it to be saved, by tagging it with <strong>SaveForInstanceRestoration</strong>.</p>
 ```java
@@ -120,10 +117,10 @@ public void onRestoration(@NonNull IziActivity savedInstance) {
     sampleTextView.setText(((SampleActivity) savedInstance).sampleTextView.getText());
 }
 ```
-<p>Views in the savedInstance object <strong>do not have</strong> a Context, to avoid leaking, so do not assign them directly, just get the desired data.</p>
-<p>The restoration process is identical with Fragments.</p>
-<br/>
+<p>Views in the savedInstance object <strong>do not have</strong> a Context, to avoid leaking. Thuss, you should not assign them directly, just get the desired data.</p>
+<p><i>The restoration process is identical with Fragments.</i></p>
 ### Retaining complex components, like Asyncs and Sockets
+<p>Use the Retainable class, with it's PersistenceDelegates interface.</p>
 <p>Declare the Retainable object, adapting it to the desired type.</p>
 ```java
 private Retainable<AsyncTask<Void, Void, Void>> asyncContainer;
