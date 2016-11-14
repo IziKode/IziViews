@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorGenericBackground">#fafafa</color>
+
+    <color name="basicWhite">#ffffff</color>
+    <color name="basicBlack">#000000</color>
+    <color name="basicTransparent">#00000000</color>
+</resources>
