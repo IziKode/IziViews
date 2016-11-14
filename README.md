@@ -121,11 +121,11 @@ public void onRestoration(@NonNull IziActivity savedInstance) {
 <p><i>The restoration process is identical with Fragments.</i></p>
 ### Retaining complex components, like Asyncs and Sockets
 <p>Use the Retainable class, with it's PersistenceDelegates interface.</p>
-<p>Declare the Retainable object, adapting it to the desired type.</p>
+ - [x] Declare the Retainable object, adapting it to the desired type.
 ```java
 private Retainable<AsyncTask<Void, Void, Void>> asyncContainer;
 ```
-<p>Initialize the component and the Retainable container.</p>
+ - [x] Initialize the component and the Retainable container.
 ```java
 AsyncTask<Void, Void, Void> async = new AsyncTask<Void, Void, Void>() { ... };
 
@@ -144,13 +144,15 @@ asyncContainer = new Retainable<AsyncTask<Void, Void, Void>>() {
     }
 };
 ```
-<p>Assign the component to the Retainable container.</p>
+ - [x] Assign the component to the Retainable container.
 ```java
 asyncContainer.setValue(async);
 ```
 ## How are Views initialized
-<p>Views are loaded with reflection, using a String format to define the ID naming convention. The parts of the String format are (1) the name of the Class, (2) the name of the View, (3) the name of the View's type.
-By default the String format is "%1$s_%2$s", meaning that a Button property, named myButton, inside an Activity named MyActivity, will look to be initialized with the id R.id.myactivity_mybutton. You can override the String format and rearrange the parts, by Overriding the getViewNameFormat function.</p>
+<p>Views are loaded with reflection, using a String format to define the ID naming convention. The parts of the String format are:<br/>
+(1) the name of the Class, (2) the name of the View, (3) the name of the View's type.<br/>
+By default the String format is <strong>"%1$s_%2$s"</strong>, meaning that a Button property, named <strong>myButton</strong>, inside an Activity named <strong>MyActivity</strong>, will look to be initialized with the id <strong>R.id.myactivity_mybutton</strong>.<br/>
+You can override the String format and rearrange the parts, by Overriding the <i>getViewNameFormat</i> function.</p>
 ```java
 @Override
 protected String getViewNameFormat() {
