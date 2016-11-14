@@ -148,5 +148,15 @@ asyncContainer = new Retainable<AsyncTask<Void, Void, Void>>() {
 ```java
 asyncContainer.setValue(async);
 ```
+## How are Views initialized
+<p>Views are loaded with reflection, using a String format to define the ID naming convention. The parts of the String format are (1) the name of the Class, (2) the name of the View, (3) the name of the View's type.
+By default the String format is "%1$s_%2$s", meaning that a Button property, named myButton, inside an Activity named MyActivity, will look to be initialized with the id R.id.myactivity_mybutton. You can override the String format and rearrange the parts, by Overriding the getViewNameFormat function.</p>
+```java
+@Override
+protected String getViewNameFormat() {
+    // With this override, the ID of the button should be R.id.mybutton_button
+    return "%2$s_%3$s";
+}
+```
 ## License
 IziViews is released under the <b>Apache 2.0</b> license. See LICENSE for details.
