@@ -10,8 +10,8 @@
  - [x] Easily retain properties and control their behaviour throughout their lifecycle
  - [x] Simplified Tab Fragments and optimized Fragment Pager Adapter
 
-## Usage
-### Activity
+# Usage
+## Activity
 ```java
 public class SampleActivity extends IziActivity {
     private Button sampleButton;
@@ -63,7 +63,7 @@ public class SampleActivity extends IziActivity {
     }
 }
 ```
-### Fragment
+## Fragment
 ```java
 public class SampleFragment extends IziFragment {
     private Button sampleButton2;
