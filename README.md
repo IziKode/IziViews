@@ -156,7 +156,7 @@ protected String getViewNameFormat() {
 }
 ```
 ### Control backstack for Fragments
-<p>Override the isStackable function of the IziFragment</p>
+<p>Override the <strong>isStackable</strong> function of the IziFragment.</p>
 ```java
 @Override
 public boolean isStackable() {
