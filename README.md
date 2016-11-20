@@ -1,6 +1,6 @@
 # IziViews
 <p><strong>IziViews is an Android library that simplifies and enhances the creation and initialization process of a Project.</strong></p>
-<p>Extended Activities, Fragments and Views, enhanced lifecycle Delegates, automations and new features to remove Android hassle and let the Developer focus on Development.</p>
+<p>Extended Activities, Fragments and Views, enhanced lifecycle Delegates, automations and new features to remove Android hassle debloat code.</p>
 <p>I have been developing and using this library for quite some time and decided to upload it, for anyone who might benefit from it and anyone willing to contribute to optimizing and expanding it.</p>
 
 ## Features
@@ -54,12 +54,12 @@ public class SampleActivity extends IziActivity {
 
     @Override
     public void postShown() {
-        // Executed just after the activity became visible
+        // Executed just after the activity becomes visible
     }
 
     @Override
     public void postConcealed() {
-        // Executed just after the activity became invisible
+        // Executed just after the activity becomes invisible
     }
 }
 ```
@@ -85,29 +85,21 @@ public class SampleFragment extends IziFragment {
     }
 
     @Override
-    public void onInitialization() {
-
-    }
+    public void onInitialization() { }
 
     @Override
-    public void onRestoration(@NonNull IziFragment savedInstance) {
-
-    }
+    public void onRestoration(@NonNull IziFragment savedInstance) { }
 
     @Override
-    public void postShown() {
-
-    }
+    public void postShown() { }
 
     @Override
-    public void postConcealed() {
-
-    }
+    public void postConcealed() { }
 }
 ```
 ### Restoring a property's state
-<p>Views and other Objects can be saved and restored from the <strong>onRestoration</strong> delegate, which provides a dummy instance of the Activity of Fragment containing the saved properties.</p>
- - [x] Set it to be saved, by tagging it with <strong>SaveForInstanceRestoration</strong>.
+<p>Views and other Objects can be saved and restored from the <strong>onRestoration</strong> delegate, which provides a dummy instance of the Activity or Fragment containing the saved properties.</p>
+ - [x] Set the property to be saved, by tagging it with <strong>SaveForInstanceRestoration</strong>.
 ```java
 @SaveForInstanceRestoration
 private TextView sampleTextView;
@@ -116,14 +108,15 @@ private TextView sampleTextView;
 ```java
 @Override
 public void onRestoration(@NonNull IziActivity savedInstance) {
-    sampleTextView.setText(((SampleActivity) savedInstance).sampleTextView.getText());
+    SampleActivity mSavedInstance = (SampleActivity) savedInstance;
+    sampleTextView.setText(mSavedInstance.sampleTextView.getText());
 }
 ```
 <p>Views in the savedInstance object <strong>do not have</strong> a Context, to avoid leaking. Thus, you should not assign them directly, just get the desired data.<br/>
 <i>The restoration process is <b>identical</b> for Fragments.</i></p>
 ### Retaining complex components, like Asyncs and Sockets
 <p>Use the Retainable class, with it's PersistenceDelegates interface.</p>
- - [x] Declare the Retainable object, adapting it to the desired type.
+ - [x] Declare the Retainable object as a class property, adapting it to the desired type.
 ```java
 private Retainable<AsyncTask<Void, Void, Void>> asyncContainer;
 ```
@@ -150,8 +143,8 @@ asyncContainer = new Retainable<AsyncTask<Void, Void, Void>>() {
 ```java
 asyncContainer.setValue(async);
 ```
-## How are Views initialized
-<p>Views are loaded with reflection, using a String format to define the ID naming convention. The parts of the String format are:<br/>
+### How are Views initialized
+<p>Views are loaded with reflection, using a String format to define the <strong>id</strong> naming convention. The parts of the String format are:<br/>
 (1) the name of the Class, (2) the name of the View, (3) the name of the View's type.<br/>
 By default the String format is <strong>"%1$s_%2$s"</strong>, meaning that a Button property, named <strong>myButton</strong>, inside an Activity named <strong>MyActivity</strong>, will look to be initialized with the id <strong>R.id.myactivity_mybutton</strong>.<br/>
 You can override the String format and rearrange the parts, by Overriding the <i>getViewNameFormat</i> function.</p>
@@ -162,5 +155,13 @@ protected String getViewNameFormat() {
     return "%2$s_%3$s";
 }
 ```
-## License
+### Control backstack for Fragments
+<p>Override the isStackable function of the IziFragment</p>
+```java
+@Override
+public boolean isStackable() {
+    return false;
+}
+```
+# License
 IziViews is released under the <b>Apache 2.0</b> license. See LICENSE for details.
