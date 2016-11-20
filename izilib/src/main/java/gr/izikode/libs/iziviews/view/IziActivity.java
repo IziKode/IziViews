@@ -37,6 +37,8 @@ public abstract class IziActivity extends AppCompatActivity implements Lifecycle
     private static final String SAVED_INSTANCE_BUNDLE_KEY = "IziActivity_savedInstance_bundleKey";
     private static final String FRAGMENT_STACK_COUNT_INSTANCE_BUNDLE_KEY = "IziActivity_fragmentStackCount_bundleKey";
 
+    private boolean initialized;
+
     private FragmentManager fragmentManager;
     private FrameLayout fragmentContainer;
     private int fragmentStackCount;
@@ -82,7 +84,10 @@ public abstract class IziActivity extends AppCompatActivity implements Lifecycle
         preShown();
         super.onResume();
         postShown();
-        surfaceRetainables();
+
+        if (initialized) {
+            surfaceRetainables();
+        }
     }
 
     @Deprecated
@@ -217,6 +222,8 @@ public abstract class IziActivity extends AppCompatActivity implements Lifecycle
     @Deprecated
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        initialized = savedInstanceState != null;
+
         super.onCreate(savedInstanceState);
         setContentView(getContentResource());
 

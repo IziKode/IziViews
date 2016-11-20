@@ -41,6 +41,7 @@ public abstract class IziFragment extends Fragment implements LifecycleDelegates
         tag = UUID.nameUUIDFromBytes(this.getClass().getName().getBytes()).toString();
     }
 
+    private boolean initialized;
     private View rootView;
 
     protected View getRootView() {
@@ -158,6 +159,8 @@ public abstract class IziFragment extends Fragment implements LifecycleDelegates
     @Deprecated
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        initialized = savedInstanceState != null;
+
         if (rootView == null) {
             rootView = inflater.inflate(getContentResource(), container, false);
 
@@ -184,7 +187,10 @@ public abstract class IziFragment extends Fragment implements LifecycleDelegates
         super.onResume();
         invalidateOptionsMenu();
         postShown();
-        surfaceRetainables();
+
+        if (initialized) {
+            surfaceRetainables();
+        }
     }
 
     @Deprecated
