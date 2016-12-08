@@ -335,4 +335,8 @@ public abstract class IziFragment extends Fragment implements LifecycleDelegates
             }
         }
     }
+
+    protected int getColor(int resourceId) {
+        return getContext().getResources().getColor(resourceId);
+    }
 }

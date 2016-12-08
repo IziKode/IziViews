@@ -40,7 +40,7 @@ public abstract class IziActivity extends AppCompatActivity implements Lifecycle
     private boolean initialized;
 
     private FragmentManager fragmentManager;
-    private FrameLayout fragmentContainer;
+    private View fragmentContainer;
     private int fragmentStackCount;
 
     private PersistentFragment persistentFragment;
@@ -228,7 +228,7 @@ public abstract class IziActivity extends AppCompatActivity implements Lifecycle
         setContentView(getContentResource());
 
         fragmentManager = getSupportFragmentManager();
-        fragmentContainer = (FrameLayout) findViewById(getFragmentContainerId());
+        fragmentContainer = findViewById(getFragmentContainerId());
         persistentFragment = (PersistentFragment) fragmentManager.findFragmentByTag(PersistentFragment.TAG);
 
         if (persistentFragment == null) {

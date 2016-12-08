@@ -20,7 +20,7 @@ import gr.izikode.libs.iziviews.util.Retainable;
  */
 
 @SuppressLint("ValidFragment")
-class PersistentFragment extends Fragment {
+public class PersistentFragment extends Fragment {
     public static final String TAG = UUID.nameUUIDFromBytes(PersistentFragment.class.getName().getBytes()).toString();
 
     private HashMap<String, Retainable> activityRetainables;
