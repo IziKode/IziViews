@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.View;
 
 import java.lang.reflect.Field;
@@ -181,6 +182,18 @@ public class PersistentFragment extends Fragment {
     public HashMap<String, Object> getObjectMap(IziFragment fragment) {
         if (fragmentNonSerializables.containsKey(fragment.tag)) {
             return fragmentNonSerializables.get(fragment.tag);
+        }
+
+        return null;
+    }
+
+    public HashMap<String, Retainable> getRetainableMap() {
+        return activityRetainables;
+    }
+
+    public HashMap<String, Retainable> getRetainableMap(IziFragment fragment) {
+        if (fragmentRetainables.containsKey(fragment.tag)) {
+            return fragmentRetainables.get(fragment.tag);
         }
 
         return null;

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -296,6 +297,22 @@ public abstract class IziFragment extends Fragment implements LifecycleDelegates
             }
         }
 
+        HashMap<String, Retainable> retainableMap = getParent().getRetainableObjectMap(this);
+        if (retainableMap != null && retainableMap.size() > 0) {
+            for (Field field : ExtendedReflector.getDeclaredFieldsByType(this, Retainable.class)) {
+                try {
+                    Retainable retainable = (Retainable) ExtendedReflector.readValue(this, field);
+                    Retainable retained = retainableMap.get(field.getName());
+
+                    if (retainable != null && retained != null && retained.getValue() != null) {
+                        retainable.setValue(retained.getValue());
+                    }
+                } catch (ReflectiveOperationException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
         if (savedInstance != null) {
             onRestoration((IziFragment) savedInstance);
         }
@@ -314,7 +331,7 @@ public abstract class IziFragment extends Fragment implements LifecycleDelegates
         for (Field field : ExtendedReflector.getDeclaredFieldsByType(this, Retainable.class)) {
             try {
                 Retainable retainable = (Retainable) ExtendedReflector.readValue(this, field);
-                if (retainable != null) {
+                if (retainable != null  && retainable.getValue() != null) {
                     retainable.preSubmerged(retainable.getValue());
                 }
             } catch (ReflectiveOperationException e) {
@@ -327,7 +344,8 @@ public abstract class IziFragment extends Fragment implements LifecycleDelegates
         for (Field field : ExtendedReflector.getDeclaredFieldsByType(this, Retainable.class)) {
             try {
                 Retainable retainable = (Retainable) ExtendedReflector.readValue(this, field);
-                if (retainable != null) {
+
+                if (retainable != null && retainable.getValue() != null) {
                     retainable.postSurfaced(retainable.getValue());
                 }
             } catch (ReflectiveOperationException e) {

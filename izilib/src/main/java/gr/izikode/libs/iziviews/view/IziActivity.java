@@ -1,7 +1,10 @@
 package gr.izikode.libs.iziviews.view;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,6 +14,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
 
 import java.io.Serializable;
@@ -385,6 +390,14 @@ public abstract class IziActivity extends AppCompatActivity implements Lifecycle
         return null;
     }
 
+    public HashMap<String, Retainable> getRetainableObjectMap(IziFragment fragment) {
+        if (persistentFragment != null) {
+            return persistentFragment.getRetainableMap(fragment);
+        }
+
+        return null;
+    }
+
     private void submergeRetainables() {
         for (Field field : ExtendedReflector.getDeclaredFieldsByType(this, Retainable.class)) {
             try {
@@ -408,6 +421,25 @@ public abstract class IziActivity extends AppCompatActivity implements Lifecycle
             } catch (ReflectiveOperationException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    public void updateInsets(boolean fitsSystemWindows) {
+        fragmentContainer.setFitsSystemWindows(fitsSystemWindows);
+    }
+
+    public void hideKeyboard() {
+        if (getCurrentFocus() != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+            imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+        }
+    }
+
+    public String getLocale() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            return getResources().getConfiguration().getLocales().get(0).getLanguage();
+        } else {
+            return getResources().getConfiguration().locale.getLanguage();
         }
     }
 }

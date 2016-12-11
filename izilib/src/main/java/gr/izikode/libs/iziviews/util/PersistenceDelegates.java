@@ -1,10 +1,12 @@
 package gr.izikode.libs.iziviews.util;
 
+import android.support.annotation.NonNull;
+
 /**
  * Created by izi.
  */
 
 public interface PersistenceDelegates<T> {
-    void preSubmerged(T value);
-    void postSurfaced(T value);
+    void preSubmerged(@NonNull T value);
+    void postSurfaced(@NonNull T value);
 }
