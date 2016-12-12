@@ -31,6 +31,7 @@ import gr.izikode.libs.iziviews.annotation.InstanceRestoration;
 import gr.izikode.libs.iziviews.annotation.SaveForInstanceRestoration;
 import gr.izikode.libs.iziviews.util.ExtendedReflector;
 import gr.izikode.libs.iziviews.util.ObjectSerializer;
+import gr.izikode.libs.iziviews.util.Parameterized;
 import gr.izikode.libs.iziviews.util.Retainable;
 
 /**
@@ -154,6 +155,14 @@ public abstract class IziActivity extends AppCompatActivity implements Lifecycle
 
         if (topmost != null) {
             topmost.onPause();
+        }
+    }
+
+    public void addFragment(Parameterized fragment) {
+        try {
+            addFragment(fragment.getFragment());
+        } catch (IllegalAccessException | InstantiationException e) {
+            throw new RuntimeException(e);
         }
     }
 
