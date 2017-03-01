@@ -61,6 +61,10 @@ public class ExtendedReflector {
     }
 
     public static Object readValue(Object instance, Field field) throws ReflectiveOperationException {
+        if (instance == null) {
+            return null;
+        }
+
         boolean originalAccessibility = field.isAccessible();
         field.setAccessible(true);
 

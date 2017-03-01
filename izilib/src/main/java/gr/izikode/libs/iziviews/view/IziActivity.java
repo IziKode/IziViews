@@ -1,7 +1,6 @@
 package gr.izikode.libs.iziviews.view;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -14,9 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.FrameLayout;
 
 import java.io.Serializable;
 import java.lang.reflect.Field;
@@ -166,6 +163,19 @@ public abstract class IziActivity extends AppCompatActivity implements Lifecycle
         }
     }
 
+    public void addSoleFragment(IziFragment fragment) {
+        clearFragments();
+        addFragment(fragment);
+    }
+
+    public void addSoleFragment(Parameterized fragment) {
+        try {
+            addSoleFragment(fragment.getFragment());
+        } catch (IllegalAccessException | InstantiationException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public IziFragment getFragment(String tag) {
         Fragment fragment = fragmentManager.findFragmentByTag(tag);
         if (fragment != null && fragment instanceof IziFragment) {
@@ -182,6 +192,15 @@ public abstract class IziActivity extends AppCompatActivity implements Lifecycle
         }
 
         return null;
+    }
+
+    public void clearFragments() {
+        for (Fragment fragment : fragmentManager.getFragments()) {
+            fragmentManager.beginTransaction().remove(fragment).commit();
+        }
+
+        persistentFragment.clearAll();
+        fragmentStackCount = 0;
     }
 
     @Override
@@ -411,7 +430,7 @@ public abstract class IziActivity extends AppCompatActivity implements Lifecycle
         for (Field field : ExtendedReflector.getDeclaredFieldsByType(this, Retainable.class)) {
             try {
                 Retainable retainable = (Retainable) ExtendedReflector.readValue(this, field);
-                if (retainable != null) {
+                if (retainable != null && retainable.getValue() != null) {
                     retainable.preSubmerged(retainable.getValue());
                 }
             } catch (ReflectiveOperationException e) {
@@ -424,7 +443,7 @@ public abstract class IziActivity extends AppCompatActivity implements Lifecycle
         for (Field field : ExtendedReflector.getDeclaredFieldsByType(this, Retainable.class)) {
             try {
                 Retainable retainable = (Retainable) ExtendedReflector.readValue(this, field);
-                if (retainable != null) {
+                if (retainable != null && retainable.getValue() != null) {
                     retainable.postSurfaced(retainable.getValue());
                 }
             } catch (ReflectiveOperationException e) {

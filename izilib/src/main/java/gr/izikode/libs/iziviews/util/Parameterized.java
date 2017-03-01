@@ -2,8 +2,6 @@ package gr.izikode.libs.iziviews.util;
 
 import android.os.Bundle;
 
-import java.lang.reflect.Type;
-
 import gr.izikode.libs.iziviews.view.IziFragment;
 
 /**

@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.View;
 
 import java.lang.reflect.Field;
@@ -93,6 +92,16 @@ public class PersistentFragment extends Fragment {
             ((HashMap) fragmentRetainables.get(fragment.tag)).clear();
             fragmentRetainables.remove(fragment.tag);
         }
+    }
+
+    public void clearAll() {
+        activityRetainables.clear();
+
+        for (HashMap map : fragmentRetainables.values()) {
+            map.clear();
+        }
+
+        fragmentRetainables.clear();
     }
 
     public void notifyAttached() {
