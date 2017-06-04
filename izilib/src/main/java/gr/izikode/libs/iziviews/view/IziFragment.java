@@ -2,6 +2,7 @@ package gr.izikode.libs.iziviews.view;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.annotation.AnimRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
@@ -324,6 +325,14 @@ public abstract class IziFragment extends Fragment implements LifecycleDelegates
         }
 
         return false;
+    }
+
+    public @AnimRes int getEnterAnimation() {
+        return R.anim.izi_fadein_anim;
+    }
+
+    public @AnimRes int getExitAnimation() {
+        return R.anim.izi_fadeout_anim;
     }
 
     private void submergeRetainables() {

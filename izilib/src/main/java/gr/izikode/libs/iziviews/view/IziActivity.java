@@ -138,6 +138,8 @@ public abstract class IziActivity extends AppCompatActivity implements Lifecycle
         }
 
         FragmentTransaction transaction = fragmentManager.beginTransaction();
+
+        transaction.setCustomAnimations(fragment.getEnterAnimation(), fragment.getExitAnimation());
         transaction.add(fragmentContainer.getId(), fragment, fragment.tag);
 
         if (addToBackStack) {
