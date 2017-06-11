@@ -43,6 +43,8 @@ public abstract class IziActivity extends AppCompatActivity implements Lifecycle
     private boolean initialized;
 
     private FragmentManager fragmentManager;
+    private List<Fragment> currentFragments;
+
     private View fragmentContainer;
     private int fragmentStackCount;
 
@@ -139,8 +141,15 @@ public abstract class IziActivity extends AppCompatActivity implements Lifecycle
 
         FragmentTransaction transaction = fragmentManager.beginTransaction();
 
-        transaction.setCustomAnimations(fragment.getEnterAnimation(), fragment.getExitAnimation());
+        if (topmost != null && topmost.isStackable()) {
+            transaction.setCustomAnimations(fragment.getEnterAnimation(), fragment.getExitAnimation(),
+                    topmost.getEnterAnimation(), topmost.getExitAnimation());
+        } else {
+            transaction.setCustomAnimations(fragment.getEnterAnimation(), fragment.getExitAnimation());
+        }
+
         transaction.add(fragmentContainer.getId(), fragment, fragment.tag);
+        currentFragments.add(fragment);
 
         if (addToBackStack) {
             transaction.addToBackStack(topmost.tag);
@@ -201,16 +210,23 @@ public abstract class IziActivity extends AppCompatActivity implements Lifecycle
             fragmentManager.beginTransaction().remove(fragment).commit();
         }
 
+        currentFragments.clear();
         persistentFragment.clearAll();
+
         fragmentStackCount = 0;
     }
 
     @Override
     public void onBackPressed() {
         IziFragment pop = getTopmostFragment();
+
         if (pop != null) {
             pop.preDismissed();
             persistentFragment.removeRetainables(pop);
+
+            if (currentFragments.contains(pop)) {
+                currentFragments.remove(pop);
+            }
         }
 
         super.onBackPressed();
@@ -263,6 +279,8 @@ public abstract class IziActivity extends AppCompatActivity implements Lifecycle
         setContentView(getContentResource());
 
         fragmentManager = getSupportFragmentManager();
+        currentFragments = new ArrayList<>();
+
         fragmentContainer = findViewById(getFragmentContainerId());
         persistentFragment = (PersistentFragment) fragmentManager.findFragmentByTag(PersistentFragment.TAG);
 

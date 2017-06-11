@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/IziViews.iml" filepath="$PROJECT_DIR$/IziViews.iml" />
       <module fileurl="file://$PROJECT_DIR$/izilib/izilib.iml" filepath="$PROJECT_DIR$/izilib/izilib.iml" />
-      <module fileurl="file://$PROJECT_DIR$/izilib/izilib.iml" filepath="$PROJECT_DIR$/izilib/izilib.iml" />
     </modules>
   </component>
 </project>

@@ -13,7 +13,7 @@ ext {
     siteUrl = 'https://github.com/IziKode/IziViews'
     gitUrl = 'https://github.com/IziKode/IziViews.git'
 
-    libraryVersion = '0.1.4'
+    libraryVersion = '0.1.5'
 
     developerId = 'izikode'
     developerName = 'Izi Kode'
@@ -26,17 +26,18 @@ ext {
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.0"
+    buildToolsVersion "25.0.3"
 
     defaultConfig {
         minSdkVersion 19
         targetSdkVersion 25
 
-        versionCode 32
-        versionName "0.1.4"
+        versionCode 33
+        versionName "0.1.5"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
         release {
             minifyEnabled false
