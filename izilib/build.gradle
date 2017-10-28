@@ -13,7 +13,7 @@ ext {
     siteUrl = 'https://github.com/IziKode/IziViews'
     gitUrl = 'https://github.com/IziKode/IziViews.git'
 
-    libraryVersion = '0.1.5'
+    libraryVersion = '0.1.6'
 
     developerId = 'izikode'
     developerName = 'Izi Kode'
@@ -25,15 +25,15 @@ ext {
 }
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.3"
+    compileSdkVersion 26
+    buildToolsVersion "26.0.2"
 
     defaultConfig {
         minSdkVersion 19
-        targetSdkVersion 25
+        targetSdkVersion 26
 
-        versionCode 33
-        versionName "0.1.5"
+        versionCode 34
+        versionName "0.1.6"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -53,8 +53,8 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support:design:25.3.1'
+    compile 'com.android.support:appcompat-v7:26.1.0'
+    compile 'com.android.support:design:26.1.0'
 
     testCompile 'junit:junit:4.12'
 }
